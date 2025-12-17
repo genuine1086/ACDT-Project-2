@@ -4,6 +4,8 @@
 2. Run locally: `python src/app.py`
 3. Open browser: `http://127.0.0.1:7860`
 
+See `docs/deployment_notes.md` for deployment details.
+
 ## Live Demo
 https://huggingface.co/spaces/Genuine123459/Stain_detector
 
