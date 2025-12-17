@@ -1,0 +1,9 @@
+coffee: brown coffee stain on fabric or textile, usually diffuse with soft edges
+wine: red or purple wine stain on fabric or textile, often darker and irregular than coffee
+tomato_sauce: red or orange sauce stain with uneven shape and irregular edges, often thicker than liquid stains
+ink: pen or marker ink stain appearing as lines, dots, or concentrated blots
+chocolate: dark brown, thick stain on fabric, often matte and less translucent than coffee
+blood: dark red or brownish-red blood stain on fabric, often absorbed deeply into the textile fibers
+juice: bright or light-colored fruit juice stain, typically translucent with softer color intensity
+dirt_mud: brown or gray dirt or mud stain with rough texture and non-uniform spread
+clean: fabric or textile surface with no visible stain or contamination
