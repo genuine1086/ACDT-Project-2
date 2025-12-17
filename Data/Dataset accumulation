@@ -1,0 +1,75 @@
+!pip install google-search-results pillow tqdm
+
+import os
+import requests
+from serpapi import GoogleSearch
+from PIL import Image
+from io import BytesIO
+from tqdm import tqdm
+
+SERPAPI_KEY = "4936378b12cafdd1dc0fb613d6b8ae3dd0b866fea76df38c75658ab7c5a104b3"
+
+classes = {
+    "tomato_sauce": "fabric contaminated with pasta sauce",
+    "ink": "pen leak on clothing",
+    "blood": "clothing contaminated with blood marks",
+    "chocolate": "melted chocolate smudge on t-shirt",
+    "dirt_mud": "soil marks on jeans",
+    "juice": "liquid fruit spill on cloth",
+    "coffee": "spilled brewed coffee on cloth",
+    "wine": "wine soaked sleeve fabric"
+}
+
+save_root = "/content/dataset/stainss"
+os.makedirs(save_root, exist_ok=True)
+
+def download_serpapi_images(query, folder, min_images=60):
+    params = {
+        "q": query,
+        "tbm": "isch",  # image search
+        "ijn": "0",
+        "api_key": SERPAPI_KEY
+    }
+
+    search = GoogleSearch(params)
+    results = search.get_dict()
+
+    if "images_results" not in results:
+        print("❌ No results for:", query)
+        return
+
+    os.makedirs(folder, exist_ok=True)
+    count = 60
+
+    print(f"🔍 Found {len(results['images_results'])} candidates for '{query}'")
+
+    for img in tqdm(results["images_results"]):
+        if count >= min_images:
+            break
+
+        url = img.get("original") or img.get("thumbnail")
+        if not url:
+            continue
+
+        try:
+            resp = requests.get(url, timeout=15)
+            pil = Image.open(BytesIO(resp.content))
+
+            if pil.size[0] < 250 or pil.size[1] < 250:
+                continue
+
+            pil.convert("RGB").save(os.path.join(folder, f"{count}.jpg"))
+            count += 1
+        except:
+            continue
+
+    print(f"✅ Saved {count} images → {folder}")
+
+for cls, query in classes.items():
+    print("\n==============================")
+    print(f"📌 Collecting: {cls}")
+    print("==============================")
+    folder = os.path.join(save_root, cls)
+    download_serpapi_images(query, folder, min_images=60)
+
+print("\n🎉 SerpAPI 이미지 수집 전체 완료!")
