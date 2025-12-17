@@ -1,1 +1,23 @@
+https://drive.google.com/file/d/1hOVY5J50ehrWhUYIiBFA7kFsLmDDpBYM/view?usp=sharing
 
+=== TRAIN ===
+blood            48 images
+chocolate        48 images
+clean            200 images
+coffee           72 images
+dirt_mud         48 images
+ink              48 images
+juice            48 images
+tomato_sauce     48 images
+wine             69 images
+
+=== VAL ===
+blood            12 images
+chocolate        12 images
+clean            50 images
+coffee           18 images
+dirt_mud         12 images
+ink              12 images
+juice            12 images
+tomato_sauce     12 images
+wine             18 images
