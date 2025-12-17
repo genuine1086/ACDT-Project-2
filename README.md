@@ -9,6 +9,9 @@ See `docs/deployment_notes.md` for deployment details.
 ## Live Demo
 https://huggingface.co/spaces/Genuine123459/Stain_detector
 
+https://x.thunkable.com/copy/460390ㅡ6dfc3598fb3f1437f1348d00f6
+
+
 ## Dataset
 Classes:
 coffee, wine, tomato_sauce, ink, chocolate, blood, juice, dirt_mud, clean
