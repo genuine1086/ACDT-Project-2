@@ -31,6 +31,7 @@ See data/data_sheet.pdf for detailed documentation.
 ## Model
 - **Tool**: Yolo v8n-cls
 - **Accuracy**:
+
 Epoch 1: ~36%
 
 Epoch 15: ~80%
