@@ -42,6 +42,8 @@ Gradio + Python (app.py)
 ## Credits
 Team:
 ACDT G27
+Junwoo Lee, Yongjun Lee, Ajung Kim, Yehseul Shin, Yeongchan Ju
+
 
 Data:
 Public web image sources (academic use only)
