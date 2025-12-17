@@ -5,15 +5,15 @@ import cv2
 import numpy as np
 
 def normalize_lighting(img):
-    """조명 보정 (안전 모드)"""
+   
     img = np.array(img)
 
-    # LAB 색공간 변환
+  
     lab = cv2.cvtColor(img, cv2.COLOR_RGB2LAB)
 
     L, A, B = cv2.split(lab)
 
-    # CLAHE를 L 채널에만 적용해서 밝기 균일화
+ 
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
     L2 = clahe.apply(L)
 
@@ -22,10 +22,10 @@ def normalize_lighting(img):
 
     return img2
     
-# 모델 로드
+
 model = YOLO("best.pt")
 
-# 얼룩별 세탁 방법 안내 (이모지 추가)
+
 wash_guide = {
     "clean": {
         "icon": "✨",
@@ -142,7 +142,7 @@ B. Dried blood
     },
     "chocolate": {
         "icon": "🍫",
-        "title": "초콜릿",
+        "title": "Chocolate",
         "method": """Fabric Type
         
 ● Best: cotton, polyester, blends, kids’ clothes, bedding, towels
@@ -236,7 +236,7 @@ Steps
     },
     "tomato_sauce": {
         "icon": "🍅",
-        "title": "토마토/케첩",
+        "title": "Ketchup",
         "method": """Fabric Type
         
 ● Cotton, polyester, blends, denim
@@ -297,13 +297,12 @@ def predict(img):
     if img is None:
         return "이미지를 업로드해주세요."
     
-    # 예측 실행
+  
     img_fixed = normalize_lighting(img)
     result = model(img)[0]
     cls = result.names[result.probs.top1]
     conf = float(result.probs.top1conf)
     
-    # 안내 정보 가져오기
     guide_info = wash_guide.get(cls, {
         "icon": "❓",
         "title": "알 수 없는 얼룩",
@@ -311,7 +310,7 @@ def predict(img):
         "tips": "전문 세탁소에 문의하세요."
     })
     
-    # 신뢰도에 따른 메시지
+
     confidence_msg = ""
     if conf >= 0.9:
         confidence_msg = "✅ Very High Confidence"
@@ -322,13 +321,13 @@ def predict(img):
     else:
         confidence_msg = "❗ Low Confidence - Recommend re-shooting from a different angle"
     
-    # Markdown 형식으로 결과 생성
+
     text = f"""
 # {guide_info['icon']} {guide_info['title']}
 
 ---
 
-## 📊 분석 결과
+## 📊 Analysis Result
 - **Accuracy:** `{conf*100:.1f}%`
 - **Reliability:** {confidence_msg}
 
@@ -350,7 +349,7 @@ def predict(img):
     
     return text
 
-# 커스텀 CSS
+
 custom_css = """
 #title {
     text-align: center;
@@ -421,7 +420,7 @@ body, .gradio-container {
 }
 """
 
-# Gradio 인터페이스 생성
+
 with gr.Blocks() as demo:
     gr.HTML(f"<style>{custom_css}</style>")
     
@@ -453,7 +452,7 @@ with gr.Blocks() as demo:
                 elem_id="output-markdown"
             )
     
-    # 사용 안내
+
     with gr.Accordion("💁 Instructions", open=False):
         gr.Markdown("""
         1. **Photo Tips**
@@ -470,7 +469,7 @@ with gr.Blocks() as demo:
            - If it's not reliable, try another angle
         """)
     
-    # 이벤트 핸들러
+
     submit_btn.click(
         fn=predict,
         inputs=input_image,
