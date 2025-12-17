@@ -1,1 +1,8 @@
 https://colab.research.google.com/drive/1b9vH04yRJNIxlI6xYjBm3wxgQvpMPHxY?usp=sharing
+Codes related to machine learning process.
+
+Check
+Model/best.pt
+Src/app.py
+requirements.txt
+for deployment codes.
